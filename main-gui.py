@@ -10,7 +10,7 @@ self.resizable(0, 0)
 self.iconbitmap("icon.ICO")
 self.grid()
 
-#Open files when called
+# Open files when called
 def strt():
     self.withdraw()
     os.system("python main.py")
