@@ -47,9 +47,7 @@ def ora(k):
             x = int(
                 lista_caselle[i] + 1
             )  # numero della riga (+1 perchè la prima è vuota)
-            y = (
-                k + 2
-            )  # numero della colonna (+2 perchè la lista parte da 0 e il file
+            y = k + 2  # numero della colonna (+2 perchè la lista parte da 0 e il file
             # excel ha la colonna delle ore da non contare)
             materia = foglio1.cell(
                 row=x, column=y
@@ -116,11 +114,7 @@ animazione = [
     "[ .  ]",
 ]
 
-print(
-    colorama.Fore.YELLOW
-    + colorama.Style.BRIGHT
-    + "\n===== Meet attender =====\n"
-)
+print(colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\n===== Meet attender =====\n")
 print(
     colorama.Fore.WHITE
     + "The program is running.\nThe Meet will open at the indicated time.\n"
