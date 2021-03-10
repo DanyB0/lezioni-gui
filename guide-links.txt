@@ -1,0 +1,15 @@
+To set the link of the Meet click "CHANGE LINKS", it will open a JSON file.
+
+Set the name of the Meet (THE SAME YOU USED IN THE EXCEL FILE) before the ":". If the name is not the same as the one in the excel file nothing will open.
+
+Set the link of the Meet after the ":".
+
+EVERYTHING MUST STAY BETWEEN THE CURLY BRACKETS.
+
+EVERY ROW EXCEPT THE LAST MUST FINISH WITH A COMMA.
+
+YOU CAN SET HOW MANY LINKS YOU WANT.
+
+For more informations visit https://github.com/DanyB0/meet-attender
+
+That's all!
