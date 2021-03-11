@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 # A Google Meet attendance
 ## Screenshots
-Add the screenshots
+[![Screenshot-105.png](https://i.postimg.cc/3JsZTHjd/Screenshot-105.png)](https://postimg.cc/qzGKsS5T)
+## Tutorial
+Add tutorial link
 ## Download meet-attender at this link (add link)
-# Guide
-add guide
