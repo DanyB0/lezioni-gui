@@ -115,7 +115,7 @@ animazione = [
     "[ .  ]",
 ]
 
-print(colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\n===== Meet attender =====\n")
+print(colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\n===== Meet attendance =====\n")
 print(
     colorama.Fore.WHITE
     + "The program is running.\nThe Meet will open at the indicated time.\n"
