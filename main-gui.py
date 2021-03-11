@@ -7,7 +7,7 @@ os.chdir(os.getcwd())
 self = tk.Tk()
 self.title("meet attender")
 self.resizable(0, 0)
-self.iconbitmap("icon.ICO")
+self.iconbitmap("icon.ico")
 self.grid()
 
 # Open files when called
