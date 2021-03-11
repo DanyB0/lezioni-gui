@@ -114,7 +114,6 @@ animazione = [
     "[ .  ]",
 ]
 
-print(colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\nDO NOT CLOSE THIS WINDOW")
 print(colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\n===== Meet attendance =====\n")
 print(
     colorama.Fore.WHITE
