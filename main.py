@@ -57,15 +57,16 @@ def ora(k):
 
 def meet(materia, k):
     try:
-        print(colorama.Fore.GREEN + colorama.Style.BRIGHT + "\n\nMeet found")
-        print(colorama.Fore.WHITE + "Connecting to: {}".format(materia))
-        print(colorama.Fore.WHITE)
-        webbrowser.open(
-            dict_classi[materia], autoraise=True
-        )  # apro il link alla classe di meet corrispondente all'ora e al
-        # giorno
-        timeout = threading.Event()
-        timeout.wait(timeout=2)  # Aspetto 2 secondi
+        if materia:
+            print(colorama.Fore.GREEN + colorama.Style.BRIGHT + "\n\nMeet found")
+            print(colorama.Fore.WHITE + "Connecting to: {}".format(materia))
+            print(colorama.Fore.WHITE)
+            webbrowser.open(
+                dict_classi[materia], autoraise=True
+            )  # apro il link alla classe di meet corrispondente all'ora e al
+            # giorno
+            timeout = threading.Event()
+            timeout.wait(timeout=2)  # Aspetto 2 secondi
     except KeyError:
         ora(k)
 
@@ -114,7 +115,7 @@ animazione = [
     "[ .  ]",
 ]
 
-print(colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\n===== Meet attendance =====\n")
+print(colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\n===== Meet attender =====\n")
 print(
     colorama.Fore.WHITE
     + "The program is running.\nThe Meet will open at the indicated time.\n"
