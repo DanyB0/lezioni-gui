@@ -9,6 +9,6 @@
 ## Download meet-attendance at this [link](https://drive.google.com/drive/folders/1ujqc6nLfB78Y9p8MPdD-BJuWbVIit16l?usp=sharing)
 
 ## Tutorial
-- Unzip the code wherever you likes
+- Unzip the code wherever you like
 - In the folder search for "meet-attendence"
 - Create a shortcut of the .exe file and move it wherever you want
