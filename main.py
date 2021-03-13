@@ -81,7 +81,7 @@ def meet(materia, k):
 # Starts the main and wait functions above
 def strt():
     self.withdraw()
-    
+
     print(
         colorama.Fore.YELLOW +
         colorama.Style.BRIGHT +
