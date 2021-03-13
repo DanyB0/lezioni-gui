@@ -81,6 +81,18 @@ def meet(materia, k):
 # Starts the main and wait functions above
 def strt():
     self.withdraw()
+    
+    print(
+        colorama.Fore.YELLOW +
+        colorama.Style.BRIGHT +
+        "\n===== Meet attendance =====\n"
+    )
+
+    print(
+        colorama.Fore.WHITE
+        + "The program is running.\
+            \nThe Meet will open at the indicated time.\n"
+    )
 
     f = threading.Thread(target=wait, daemon=True)
     f.start()
@@ -191,16 +203,7 @@ if __name__ == "__main__":
         "[ .  ]",
     ]
 
-    print(
-        colorama.Fore.YELLOW +
-        colorama.Style.BRIGHT +
-        "\n===== Meet attendance =====\n"
-    )
-    print(
-        colorama.Fore.WHITE
-        + "The program is running.\
-            \nThe Meet will open at the indicated time.\n"
-    )
+    print("\n !!! DO NOT CLOSE THIS WINDOW !!!")
 
     A = 0
     i = 0
