@@ -3,8 +3,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 # A Google Meet attendance
 
-## The one and only screenshot
-[![Screenshot-105.png](https://i.postimg.cc/3JsZTHjd/Screenshot-105.png)](https://postimg.cc/qzGKsS5T)
+## Screenshots
+[![Screenshot-136.png](https://i.postimg.cc/rpL38Z85/Screenshot-136.png)](https://postimg.cc/VJDDgR0N)
+[![Screenshot-137.png](https://i.postimg.cc/mrRpxcww/Screenshot-137.png)](https://postimg.cc/18Crw3bn)
 
 ## Download meet-attendance at this [link](https://drive.google.com/drive/folders/1ujqc6nLfB78Y9p8MPdD-BJuWbVIit16l?usp=sharing)
 
