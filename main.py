@@ -76,7 +76,7 @@ def meet(materia, k):
 
 # Starts the main and wait functions above
 def strt():
-    self.withdraw()
+    self.destroy()
 
     print(
         colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\n===== Meet attendance =====\n"
