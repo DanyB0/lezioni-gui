@@ -64,11 +64,7 @@ def ora(k):
 def meet(materia, k):
     try:
         if materia:
-            print(
-                colorama.Fore.GREEN +
-                colorama.Style.BRIGHT +
-                "\n\nMeet found"
-            )
+            print(colorama.Fore.GREEN + colorama.Style.BRIGHT + "\n\nMeet found")
             print(colorama.Fore.WHITE + f"Connecting to: {materia}")
             print(colorama.Fore.WHITE)
             webbrowser.open(dict_classes[materia], autoraise=True)
@@ -83,9 +79,7 @@ def strt():
     self.withdraw()
 
     print(
-        colorama.Fore.YELLOW +
-        colorama.Style.BRIGHT +
-        "\n===== Meet attendance =====\n"
+        colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\n===== Meet attendance =====\n"
     )
 
     print(
@@ -102,19 +96,19 @@ def strt():
 
 
 def exc():
-    os.startfile("schedule.xlsx")
+    webbrowser.open("schedule.xlsx")
 
 
 def lnk():
-    os.startfile("meet-link.json")
+    webbrowser.open("meet-link.json")
 
 
 def gdsch():
-    os.startfile("guide-schedule.txt")
+    webbrowser.open("guide-schedule.txt")
 
 
 def gdlnk():
-    os.startfile("guide-links.txt")
+    webbrowser.open("guide-links.txt")
 
 
 def web():
@@ -171,11 +165,13 @@ if __name__ == "__main__":
     schedule_sheet = schedule.get_sheet_by_name("Schedule")
 
     # Days
-    monday = schedule_sheet.cell(row=1, column=2).value
-    tuesday = schedule_sheet.cell(row=1, column=3).value
-    wednesday = schedule_sheet.cell(row=1, column=4).value
-    thursday = schedule_sheet.cell(row=1, column=5).value
-    friday = schedule_sheet.cell(row=1, column=6).value
+    sunday = schedule_sheet.cell(row=1, column=2).value
+    monday = schedule_sheet.cell(row=1, column=3).value
+    tuesday = schedule_sheet.cell(row=1, column=4).value
+    wednesday = schedule_sheet.cell(row=1, column=5).value
+    thursday = schedule_sheet.cell(row=1, column=6).value
+    friday = schedule_sheet.cell(row=1, column=7).value
+    saturday = schedule_sheet.cell(row=1, column=8).value
 
     # Hours
     hr_1 = schedule_sheet.cell(row=2, column=1).value
@@ -191,7 +187,7 @@ if __name__ == "__main__":
     # Lists with hours, cells and days
     hours_list = [hr_1, hr_2, hr_3, hr_4, hr_5, hr_6, hr_7, hr_8, hr_9]
     cells_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    days_list = [monday, tuesday, wednesday, thursday, friday]
+    days_list = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
 
     # Animation
     animation = [
