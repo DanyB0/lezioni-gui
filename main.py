@@ -24,8 +24,9 @@ def main():
         k = giorno()
         materia = ora(k)
         meet(materia, k)
-
-
+        timeout7 = threading.Event()
+        timeout7.wait(timeout=60)
+        
 # Animation
 def wait():
     i = 0
@@ -204,4 +205,3 @@ if __name__ == "__main__":
     A = 0
     i = 0
     self.mainloop()
-
