@@ -77,7 +77,7 @@ def wait():
 
 # Day
 def giorno(days_list):
-    # Compares every element in in "days_list" with the current date
+    # Compares every element in "days_list" with the current date
     # and returns the number of the column of the current day (k)
     for k in range(len(days_list)):
         if str(days_list[k]) == datetime.datetime.now().strftime("%A"):
