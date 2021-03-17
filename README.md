@@ -9,7 +9,11 @@
 [![Screenshot-136.png](https://i.postimg.cc/rpL38Z85/Screenshot-136.png)](https://postimg.cc/VJDDgR0N)
 [![Screenshot-137.png](https://i.postimg.cc/mrRpxcww/Screenshot-137.png)](https://postimg.cc/18Crw3bn)
 
-## Tutorial
-#### - Unzip the code wherever you like
-#### - In the folder search for "meet-attendence"
-#### - Create a shortcut of the .exe file and move it wherever you want
+## Development tutorial
+### If you want to modify/upgrade/test the source code follow the instructions below
+### You must have python installed
+* Install Python [here](https://www.python.org/)
+### Install the requisites
+```
+pip install -r requirements.txt
+```
