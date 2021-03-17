@@ -7,6 +7,8 @@ import webbrowser
 
 import colorama
 import openpyxl
+import pyautogui
+import pyscreeze
 
 colorama.init()
 
@@ -19,14 +21,51 @@ self.iconbitmap("icon.ico")
 self.grid()
 
 
-def main():
+def take():
+    # File JSON with links
+    classes = open("meet-link.json", "r").read()
+    dict_classes = json.loads(classes)
+
+    # File Excel with schedule
+    schedule = openpyxl.load_workbook("schedule.xlsx")
+    schedule_sheet = schedule.get_sheet_by_name("Schedule")
+
+    # Days
+    sunday = schedule_sheet.cell(row=1, column=2).value
+    monday = schedule_sheet.cell(row=1, column=3).value
+    tuesday = schedule_sheet.cell(row=1, column=4).value
+    wednesday = schedule_sheet.cell(row=1, column=5).value
+    thursday = schedule_sheet.cell(row=1, column=6).value
+    friday = schedule_sheet.cell(row=1, column=7).value
+    saturday = schedule_sheet.cell(row=1, column=8).value
+
+    # Hours
+    hr_1 = schedule_sheet.cell(row=2, column=1).value
+    hr_2 = schedule_sheet.cell(row=3, column=1).value
+    hr_3 = schedule_sheet.cell(row=4, column=1).value
+    hr_4 = schedule_sheet.cell(row=5, column=1).value
+    hr_5 = schedule_sheet.cell(row=6, column=1).value
+    hr_6 = schedule_sheet.cell(row=7, column=1).value
+    hr_7 = schedule_sheet.cell(row=8, column=1).value
+    hr_8 = schedule_sheet.cell(row=9, column=1).value
+    hr_9 = schedule_sheet.cell(row=10, column=1).value
+
+    # Lists with hours, cells and days
+    hours_list = [hr_1, hr_2, hr_3, hr_4, hr_5, hr_6, hr_7, hr_8, hr_9]
+    cells_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    days_list = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+
+    return dict_classes, schedule_sheet, hours_list, cells_list, days_list
+
+
+def main(dict_classes, schedule_sheet, hours_list, cells_list, days_list):
+    take()
     while A == 0:
-        k = giorno()
-        materia = ora(k)
-        meet(materia, k)
-        timeout7 = threading.Event()
-        timeout7.wait(timeout=60)
-        
+        k = giorno(days_list)
+        materia = ora(hours_list, cells_list, k, schedule_sheet)
+        meet(materia, dict_classes, k)
+
+
 # Animation
 def wait():
     i = 0
@@ -38,7 +77,7 @@ def wait():
 
 
 # Day
-def giorno():
+def giorno(days_list):
     # Compares every element in in "days_list" with the current date
     # and returns the number of the column of the current day (k)
     for k in range(len(days_list)):
@@ -47,8 +86,8 @@ def giorno():
 
 
 # Takes the subject correspondent to the hour and day
-def ora(k):
-    # Compares every element in in "hours_list" with the current hour
+def ora(hours_list, cells_list, k, schedule_sheet):
+    # Compares every element in "hours_list" with the current hour
     # and returns the subject correspondent to the hour and the day
     for i in range(len(hours_list)):
         if str(hours_list[i]) == datetime.datetime.now().strftime(
@@ -62,15 +101,56 @@ def ora(k):
 
 
 # Opens the Meet link
-def meet(materia, k):
+def meet(materia, dict_classes, k):
     try:
         if materia:
             print(colorama.Fore.GREEN + colorama.Style.BRIGHT + "\n\nMeet found")
             print(colorama.Fore.WHITE + f"Connecting to: {materia}")
-            print(colorama.Fore.WHITE)
             webbrowser.open(dict_classes[materia], autoraise=True)
             timeout = threading.Event()
-            timeout.wait(timeout=2)
+            timeout.wait(timeout=5)
+
+            # Buttons that allows you to partecipate the lesson
+            ask = pyautogui.locateCenterOnScreen("img_ask.png")
+            part = pyautogui.locateCenterOnScreen("img_part.png")
+            # Refresh the page until the meet is ready
+            while ask or part == None:
+                print(
+                    colorama.Fore.RED + colorama.Style.BRIGHT + "The Meet is not ready"
+                )
+                print(
+                    colorama.Fore.YELLOW
+                    + colorama.Style.BRIGHT
+                    + "Refreshing the page..."
+                )
+                ric = pyautogui.locateCenterOnScreen("img_ric.png")
+                pyautogui.moveTo(ric)
+                pyautogui.click()
+                timeout8 = threading.Event()
+                timeout8.wait(timeout=5)
+                ask = pyautogui.locateCenterOnScreen("img_ask.png")
+                part = pyautogui.locateCenterOnScreen("img_part.png")
+            # Click the buttons that allows you to partecipate the lesson
+            if part:
+                pyautogui.moveTo(part)
+                pyautogui.click()
+                print(
+                    colorama.Fore.GREEN + colorama.Style.BRIGHT + "You're in the Meet!"
+                )
+            else:
+                pyautogui.moveTo(ask)
+                pyautogui.click()
+                ask = pyautogui.locateCenterOnScreen("img_ask.png")
+                print(
+                    colorama.Fore.WHITE
+                    + colorama.Style.BRIGHT
+                    + "Waiting for the host to accept you"
+                )
+                while ask:
+                    pass
+                print(
+                    colorama.Fore.GREEN + colorama.Style.BRIGHT + "You're in the Meet!"
+                )
     except KeyError:
         ora(k)
 
@@ -78,6 +158,8 @@ def meet(materia, k):
 # Starts the main and wait functions above
 def strt():
     self.destroy()
+
+    dict_classes, schedule_sheet, hours_list, cells_list, days_list = take()
 
     print(
         colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\n===== Meet attendance =====\n"
@@ -92,7 +174,10 @@ def strt():
     f = threading.Thread(target=wait, daemon=True)
     f.start()
 
-    e = threading.Thread(target=main)
+    e = threading.Thread(
+        target=main,
+        args=(dict_classes, schedule_sheet, hours_list, cells_list, days_list),
+    )
     e.start()
 
 
@@ -157,38 +242,8 @@ me.grid(row=3, column=1, sticky="nswe")
 # End of GUI widgets
 
 if __name__ == "__main__":
-    # File JSON with links
-    classes = open("meet-link.json", "r").read()
-    dict_classes = json.loads(classes)
 
-    # File Excel with schedule
-    schedule = openpyxl.load_workbook("schedule.xlsx")
-    schedule_sheet = schedule.get_sheet_by_name("Schedule")
-
-    # Days
-    sunday = schedule_sheet.cell(row=1, column=2).value
-    monday = schedule_sheet.cell(row=1, column=3).value
-    tuesday = schedule_sheet.cell(row=1, column=4).value
-    wednesday = schedule_sheet.cell(row=1, column=5).value
-    thursday = schedule_sheet.cell(row=1, column=6).value
-    friday = schedule_sheet.cell(row=1, column=7).value
-    saturday = schedule_sheet.cell(row=1, column=8).value
-
-    # Hours
-    hr_1 = schedule_sheet.cell(row=2, column=1).value
-    hr_2 = schedule_sheet.cell(row=3, column=1).value
-    hr_3 = schedule_sheet.cell(row=4, column=1).value
-    hr_4 = schedule_sheet.cell(row=5, column=1).value
-    hr_5 = schedule_sheet.cell(row=6, column=1).value
-    hr_6 = schedule_sheet.cell(row=7, column=1).value
-    hr_7 = schedule_sheet.cell(row=8, column=1).value
-    hr_8 = schedule_sheet.cell(row=9, column=1).value
-    hr_9 = schedule_sheet.cell(row=10, column=1).value
-
-    # Lists with hours, cells and days
-    hours_list = [hr_1, hr_2, hr_3, hr_4, hr_5, hr_6, hr_7, hr_8, hr_9]
-    cells_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    days_list = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+    dict_classes, schedule_sheet, hours_list, cells_list, days_list = take()
 
     # Animation
     animation = [
@@ -205,3 +260,4 @@ if __name__ == "__main__":
     A = 0
     i = 0
     self.mainloop()
+
