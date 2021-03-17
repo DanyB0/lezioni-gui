@@ -136,6 +136,8 @@ def meet(materia, dict_classes, k):
                 print(
                     colorama.Fore.GREEN + colorama.Style.BRIGHT + "You're in the Meet!"
                 )
+            # I've not tested this part so it might not work
+            # Start ot the part not tested
             else:
                 pyautogui.moveTo(ask)
                 pyautogui.click()
@@ -146,10 +148,11 @@ def meet(materia, dict_classes, k):
                     + "Waiting for the host to accept you"
                 )
                 while ask:
-                    pass
+                    ask = pyautogui.locateCenterOnScreen("img_ask.png")
                 print(
                     colorama.Fore.GREEN + colorama.Style.BRIGHT + "You're in the Meet!"
                 )
+            # End of the part not tested
     except KeyError:
         ora(k)
 
