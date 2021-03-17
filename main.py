@@ -79,7 +79,7 @@ def wait():
 def giorno(days_list):
     # Compares every element in "days_list" with the current date
     # and returns the number of the column of the current day (k)
-    for k in range(len(days_list)):
+    for k, day in enumerate(days_list):
         if str(days_list[k]) == datetime.datetime.now().strftime("%A"):
             return k
 
@@ -88,7 +88,7 @@ def giorno(days_list):
 def ora(hours_list, cells_list, k, schedule_sheet):
     # Compares every element in "hours_list" with the current hour
     # and returns the subject correspondent to the hour and the day
-    for i in range(len(hours_list)):
+    for i, hour in enumerate(hours_list):
         if str(hours_list[i]) == datetime.datetime.now().strftime(
             "%H:%M:%S"
         ):  # number of the row
