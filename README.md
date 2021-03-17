@@ -12,8 +12,8 @@
 * ### [meet-attendance](https://drive.google.com/drive/folders/1j3hYrqlCxwL4MUfCgW6JEkFQsA_UAgll?usp=sharing) (link to Google Drive folder)
 
 ## Local setup
-### Install Python if you don't have it
-- * #### Install Python [here](https://www.python.org/)
+- ### Install Python if you don't have it
+  * #### Install Python [here](https://www.python.org/)
 - ### Install the requisites
   ```
   pip install -r requirements.txt
