@@ -7,9 +7,7 @@
 [![Screenshot-136.png](https://i.postimg.cc/rpL38Z85/Screenshot-136.png)](https://postimg.cc/VJDDgR0N)
 [![Screenshot-137.png](https://i.postimg.cc/mrRpxcww/Screenshot-137.png)](https://postimg.cc/18Crw3bn)
 
-## Download meet-attendance at this [link](https://drive.google.com/drive/folders/1ujqc6nLfB78Y9p8MPdD-BJuWbVIit16l?usp=sharing)
-
 ## Tutorial
-- Unzip the code wherever you like
-- In the folder search for "meet-attendence"
-- Create a shortcut of the .exe file and move it wherever you want
+#### - Unzip the code wherever you like
+#### - In the folder search for "meet-attendence"
+#### - Create a shortcut of the .exe file and move it wherever you want
