@@ -8,7 +8,6 @@ import webbrowser
 import colorama
 import openpyxl
 import pyautogui
-import pyscreeze
 
 colorama.init()
 
