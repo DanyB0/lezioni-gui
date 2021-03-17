@@ -81,7 +81,7 @@ def giorno(days_list):
     # and returns the number of the column of the current day (k)
     for k in enumerate(days_list):
         if str(days_list[k[0]]) == datetime.datetime.now().strftime("%A"):
-            return k
+            return k[0]
 
 
 # Takes the subject correspondent to the hour and day
