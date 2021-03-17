@@ -77,7 +77,7 @@ def wait():
 
 # Day
 def giorno(days_list):
-    # Compares every element in "days_list" with the current date
+    # Compares every element in in "days_list" with the current date
     # and returns the number of the column of the current day (k)
     for k in enumerate(days_list):
         if str(days_list[k[0]]) == datetime.datetime.now().strftime("%A"):
@@ -113,12 +113,12 @@ def meet(materia, dict_classes, k):
             ask = pyautogui.locateCenterOnScreen("img_ask.png")
             part = pyautogui.locateCenterOnScreen("img_part.png")
             # Refresh the page until the meet is ready
-            while ask or part == None:
+            while ask or part is None:
                 print(
                     colorama.Fore.RED + colorama.Style.BRIGHT + "The Meet is not ready"
                 )
                 print(
-                    colorama.Fore.YELLOW
+                    colorama.Fore.WHITE
                     + colorama.Style.BRIGHT
                     + "Refreshing the page..."
                 )
@@ -136,8 +136,6 @@ def meet(materia, dict_classes, k):
                 print(
                     colorama.Fore.GREEN + colorama.Style.BRIGHT + "You're in the Meet!"
                 )
-            # I've not tested this part so it might not work
-            # Start ot the part not tested
             else:
                 pyautogui.moveTo(ask)
                 pyautogui.click()
@@ -148,11 +146,10 @@ def meet(materia, dict_classes, k):
                     + "Waiting for the host to accept you"
                 )
                 while ask:
-                    ask = pyautogui.locateCenterOnScreen("img_ask.png")
+                    pass
                 print(
                     colorama.Fore.GREEN + colorama.Style.BRIGHT + "You're in the Meet!"
                 )
-            # End of the part not tested
     except KeyError:
         ora(k)
 
