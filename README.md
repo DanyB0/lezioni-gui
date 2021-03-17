@@ -11,10 +11,10 @@
 
 ## Development tutorial
 ### If you want to modify/upgrade/test the source code follow the instructions below
-### (You must have python installed)
-* Install Python [here](https://www.python.org/)
-### Install the requisites
-```
-pip install -r requirements.txt
-```
-### Start modifying
+- ### (You must have python installed)
+  * Install Python [here](https://www.python.org/)
+- ### Install the requisites
+  ```
+  pip install -r requirements.txt
+  ```
+- ### Start modifying
