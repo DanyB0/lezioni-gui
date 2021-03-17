@@ -92,7 +92,7 @@ def ora(hours_list, cells_list, k, schedule_sheet):
         if str(hours_list[i[0]]) == datetime.datetime.now().strftime(
             "%H:%M:%S"
         ):  # number of the row
-            x = cells_list[i] + 1
+            x = cells_list[i[0]] + 1
             # number of the column
             y = k + 2
             materia = schedule_sheet.cell(row=x, column=y).value
