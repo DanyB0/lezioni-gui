@@ -10,7 +10,7 @@
 [![Screenshot-137.png](https://i.postimg.cc/mrRpxcww/Screenshot-137.png)](https://postimg.cc/18Crw3bn)
 
 ## Download the program
-* ### [meet-attendance](https://drive.google.com/drive/folders/1j3hYrqlCxwL4MUfCgW6JEkFQsA_UAgll?usp=sharing) (link to Googel Dreive folder)
+* ### [meet-attendance](https://drive.google.com/drive/folders/1j3hYrqlCxwL4MUfCgW6JEkFQsA_UAgll?usp=sharing) (link to Google Drive folder)
 
 ## Development tutorial
 ### If you want to modify/upgrade/test the source code follow the instructions below
