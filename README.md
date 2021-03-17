@@ -10,7 +10,7 @@
 [![Screenshot-137.png](https://i.postimg.cc/mrRpxcww/Screenshot-137.png)](https://postimg.cc/18Crw3bn)
 
 ## Download the program
-* ### [meet-attendance](https://drive.google.com/drive/folders/1j3hYrqlCxwL4MUfCgW6JEkFQsA_UAgll?usp=sharing) (link to Google Drive folder)
+* ### [meet-attendance](https://drive.google.com/drive/folders/1j3hYrqlCxwL4MUfCgW6JEkFQsA_UAgll?usp=sharing) (link to Drive folder)
 
 ## Local setup
 - ### Install Python if you don't have it
