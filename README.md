@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # A bad-looking Google Meet attendance :)
+## The refreshing page until the meet is ready feature doesn't work yet :(.
 
 ## Screenshots
 [![Screenshot-136.png](https://i.postimg.cc/rpL38Z85/Screenshot-136.png)](https://postimg.cc/VJDDgR0N)
@@ -19,4 +20,4 @@
   ```
   pip install -r requirements.txt
   ```
-- ### Start modifying
+- ### Start modify
