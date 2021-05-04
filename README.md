@@ -17,14 +17,13 @@
 - ### Install Python if you don't have it
   * ### Install Python [here](https://www.python.org/)
 - ### Install the requisites
-  ```
-  pip install -r requirements.txt
-  ```
+  `pip install -r requirements.txt`
+
 - ### Make a screenshot of the meet page and keep only this 3 elements:
-  * ### Ask to partecipate button (rename it: "img_ask.png")
+  * ### Ask to partecipate button (rename it: `img_ask.png`)
     [![img-ask.png](https://i.postimg.cc/rz6dbCtp/img-ask.png)](https://postimg.cc/64054Zcs)
-  * ### Partecipate button (rename it: "img_part.png")
+  * ### Partecipate button (rename it: `img_part.png`)
     [![img-part.png](https://i.postimg.cc/fL2mH9K3/img-part.png)](https://postimg.cc/cg3vC6PZ)
-  * ### refreshing button (rename it: "img_ric.png")
+  * ### refreshing button (rename it: `img_ric.png`)
     [![img-ric.png](https://i.postimg.cc/0ysnK7Hx/img-ric.png)](https://postimg.cc/CzckWng6)
   ### And put them in where is your meet-attendance.py file
