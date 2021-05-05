@@ -16,7 +16,7 @@
 ## Local setup
 - ### Install Python if you don't have it
   * ### Install Python [here](https://www.python.org/)
-- ### Install the requisites
+- ### Install the requirements
   ### `pip install -r requirements.txt`
 
 - ### Make a screenshot of the meet page and keep only this 3 elements:
