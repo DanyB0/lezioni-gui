@@ -8,6 +8,7 @@ import webbrowser
 import colorama
 import openpyxl
 import pyautogui
+from helium import ENTER, Text, click, go_to, press, start_chrome, write
 
 colorama.init()
 
@@ -54,15 +55,47 @@ def take():
     cells_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     days_list = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
 
-    return dict_classes, schedule_sheet, hours_list, cells_list, days_list
+    # Take the credentials in the file
+    cred_fl = open("credentials.txt", "r")
+    credentials = cred_fl.readlines()
+    cred_fl.close()
+
+    return dict_classes, schedule_sheet, hours_list, cells_list, days_list, credentials
 
 
-def main(dict_classes, schedule_sheet, hours_list, cells_list, days_list):
+def main(dict_classes, schedule_sheet, hours_list, cells_list, days_list, credentials):
     take()
+    start_chrome("google.com")
+    # login into the Google account
+    if credentials[0] == "ita\n":
+        go_to(
+            "https://accounts.google.com/signin/v2/identifier?service=classroom&passive=1209600&continue=https%3A%2F%2Fclassroom.google.com%2Fu%2F0%2Fh%3Fhl%3Dit&followup=https%3A%2F%2Fclassroom.google.com%2Fu%2F0%2Fh%3Fhl%3Dit&hl=it&flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+        )
+        write(
+            credentials[1].replace("\n", ""),
+            into="Indirizzo email o numero di telefono",
+        )
+        press(ENTER)
+        write(credentials[2], into="Inserisci la password")
+        press(ENTER)
+    elif credentials[0] == "eng\n,":
+        go_to(
+            "https://accounts.google.com/signin/v2/identifier?service=classroom&passive=1209600&continue=https%3A%2F%2Fclassroom.google.com%2Fu%2F0%2Fh%3Fhl%3Dit&followup=https%3A%2F%2Fclassroom.google.com%2Fu%2F0%2Fh%3Fhl%3Dit&hl=it&flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+        )
+        write(credentials[1].replace("\n", ""), into="Email or phone")
+        press(ENTER)
+        write(credentials[2], into="Enter your password")
+        press(ENTER)
+    else:
+        print(
+            colorama.Fore.RED
+            + colorama.Style.BRIGHT
+            + "\n\nThe language is not supported (ita-eng)"
+        )
     while A == 0:
         k = giorno(days_list)
         materia = ora(hours_list, cells_list, k, schedule_sheet)
-        meet(materia, dict_classes, k)
+        meet(materia, dict_classes, k, credentials)
 
 
 # Animation
@@ -79,20 +112,20 @@ def wait():
 def giorno(days_list):
     # Compares every element in in "days_list" with the current date
     # and returns the number of the column of the current day (k)
-    for k in enumerate(days_list):
-        if str(days_list[k[0]]) == datetime.datetime.now().strftime("%A"):
-            return k[0]
+    for k in range(len(days_list)):
+        if str(days_list[k]) == datetime.datetime.now().strftime("%A"):
+            return k
 
 
 # Takes the subject correspondent to the hour and day
 def ora(hours_list, cells_list, k, schedule_sheet):
     # Compares every element in "hours_list" with the current hour
     # and returns the subject correspondent to the hour and the day
-    for i in enumerate(hours_list):
-        if str(hours_list[i[0]]) == datetime.datetime.now().strftime(
+    for i in range(len(hours_list)):
+        if str(hours_list[i]) == datetime.datetime.now().strftime(
             "%H:%M:%S"
         ):  # number of the row
-            x = cells_list[i[0]] + 1
+            x = cells_list[i] + 1
             # number of the column
             y = k + 2
             materia = schedule_sheet.cell(row=x, column=y).value
@@ -100,56 +133,56 @@ def ora(hours_list, cells_list, k, schedule_sheet):
 
 
 # Opens the Meet link
-def meet(materia, dict_classes, k):
+def meet(materia, dict_classes, k, credentials):
     try:
         if materia:
             print(colorama.Fore.GREEN + colorama.Style.BRIGHT + "\n\nMeet found")
             print(colorama.Fore.WHITE + f"Connecting to: {materia}")
-            webbrowser.open(dict_classes[materia], autoraise=True)
+            # join the meet
             timeout = threading.Event()
             timeout.wait(timeout=5)
-
-            # Buttons that allows you to partecipate the lesson
-            ask = pyautogui.locateCenterOnScreen("img_ask.png")
-            part = pyautogui.locateCenterOnScreen("img_part.png")
-            # Refresh the page until the meet is ready
-            while ask or part is None:
-                print(
-                    colorama.Fore.RED + colorama.Style.BRIGHT + "The Meet is not ready"
-                )
-                print(
-                    colorama.Fore.WHITE
-                    + colorama.Style.BRIGHT
-                    + "Refreshing the page..."
-                )
-                ric = pyautogui.locateCenterOnScreen("img_ric.png")
-                pyautogui.moveTo(ric)
-                pyautogui.click()
-                timeout8 = threading.Event()
-                timeout8.wait(timeout=5)
-                ask = pyautogui.locateCenterOnScreen("img_ask.png")
-                part = pyautogui.locateCenterOnScreen("img_part.png")
-            # Click the buttons that allows you to partecipate the lesson
-            if part:
-                pyautogui.moveTo(part)
-                pyautogui.click()
+            go_to(dict_classes[materia])
+            if Text("Chiudi").exists():
+                click("Chiudi")
+            # join the meet
+            if Text("Partecipa").exists():
+                click("Partecipa")
                 print(
                     colorama.Fore.GREEN + colorama.Style.BRIGHT + "You're in the Meet!"
                 )
-            else:
-                pyautogui.moveTo(ask)
-                pyautogui.click()
-                ask = pyautogui.locateCenterOnScreen("img_ask.png")
+            elif Text("Chiedi di partecipare").exists():
+                click("Chiedi di partecipare")
                 print(
                     colorama.Fore.WHITE
                     + colorama.Style.BRIGHT
                     + "Waiting for the host to accept you"
                 )
-                while ask:
-                    pass
+            # Refresh the page until the meet is ready
+            if Text("Ricarica").exists():
+                refresh = threading.Thread(target=ref)
+                refresh.start()
                 print(
-                    colorama.Fore.GREEN + colorama.Style.BRIGHT + "You're in the Meet!"
+                    colorama.Fore.RED + colorama.Style.BRIGHT + "The Meet is not ready"
                 )
+                print(
+                    colorama.Fore.YELLOW
+                    + colorama.Style.BRIGHT
+                    + "Refreshing the page..."
+                )
+            # Refresh the page until the meet is ready
+            else:
+                print(
+                    colorama.Fore.RED + colorama.Style.BRIGHT + "The Meet is not ready"
+                )
+                print(
+                    colorama.Fore.YELLOW
+                    + colorama.Style.BRIGHT
+                    + "Refreshing the page..."
+                )
+                pyautogui.press("f5")
+                timeout = threading.Event()
+                timeout.wait(timeout=7)
+
     except KeyError:
         ora(k)
 
@@ -158,7 +191,14 @@ def meet(materia, dict_classes, k):
 def strt():
     self.destroy()
 
-    dict_classes, schedule_sheet, hours_list, cells_list, days_list = take()
+    (
+        dict_classes,
+        schedule_sheet,
+        hours_list,
+        cells_list,
+        days_list,
+        credentials,
+    ) = take()
 
     print(
         colorama.Fore.YELLOW + colorama.Style.BRIGHT + "\n===== Meet attendance =====\n"
@@ -175,9 +215,23 @@ def strt():
 
     e = threading.Thread(
         target=main,
-        args=(dict_classes, schedule_sheet, hours_list, cells_list, days_list),
+        args=(
+            dict_classes,
+            schedule_sheet,
+            hours_list,
+            cells_list,
+            days_list,
+            credentials,
+        ),
     )
     e.start()
+
+
+def ref():
+    while Text("Ricarica").exists():
+        click("Ricarica")
+        timeout12 = threading.Event()
+        timeout12.wait(timeout=7)
 
 
 def exc():
@@ -242,7 +296,14 @@ me.grid(row=3, column=1, sticky="nswe")
 
 if __name__ == "__main__":
 
-    dict_classes, schedule_sheet, hours_list, cells_list, days_list = take()
+    (
+        dict_classes,
+        schedule_sheet,
+        hours_list,
+        cells_list,
+        days_list,
+        credentials,
+    ) = take()
 
     # Animation
     animation = [
@@ -259,3 +320,4 @@ if __name__ == "__main__":
     A = 0
     i = 0
     self.mainloop()
+
