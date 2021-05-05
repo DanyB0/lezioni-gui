@@ -17,4 +17,4 @@
 - ### Install the requirements
   * ### `pip install -r requirements.txt`
 - ### This project uses Helium, a Python library which is like Selenium but more high-level. You may need to download the chromedriver.exe.
-- ### Open the "credentials.txt file" and write your language (ita/eng) in the 1st row, your email in the 2nd row and your passeword in the 3rd row.,
+- ### Open the `credentials.txt` file and write your language (ita/eng) in the 1st row, your email in the 2nd row and your password in the 3rd row.
