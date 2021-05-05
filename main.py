@@ -138,51 +138,15 @@ def meet(materia, dict_classes, k, credentials):
         if materia:
             print(colorama.Fore.GREEN + colorama.Style.BRIGHT + "\n\nMeet found")
             print(colorama.Fore.WHITE + f"Connecting to: {materia}")
-            # join the meet
             timeout = threading.Event()
             timeout.wait(timeout=5)
+            # opens the meet page
             go_to(dict_classes[materia])
-            if Text("Chiudi").exists():
-                click("Chiudi")
+            close = threading.Thread(target=closef)
+            close.start()
             # join the meet
-            if Text("Partecipa").exists():
-                click("Partecipa")
-                print(
-                    colorama.Fore.GREEN + colorama.Style.BRIGHT + "You're in the Meet!"
-                )
-            elif Text("Chiedi di partecipare").exists():
-                click("Chiedi di partecipare")
-                print(
-                    colorama.Fore.WHITE
-                    + colorama.Style.BRIGHT
-                    + "Waiting for the host to accept you"
-                )
-            # Refresh the page until the meet is ready
-            if Text("Ricarica").exists():
-                refresh = threading.Thread(target=ref)
-                refresh.start()
-                print(
-                    colorama.Fore.RED + colorama.Style.BRIGHT + "The Meet is not ready"
-                )
-                print(
-                    colorama.Fore.YELLOW
-                    + colorama.Style.BRIGHT
-                    + "Refreshing the page..."
-                )
-            # Refresh the page until the meet is ready
-            else:
-                print(
-                    colorama.Fore.RED + colorama.Style.BRIGHT + "The Meet is not ready"
-                )
-                print(
-                    colorama.Fore.YELLOW
-                    + colorama.Style.BRIGHT
-                    + "Refreshing the page..."
-                )
-                pyautogui.press("f5")
-                timeout = threading.Event()
-                timeout.wait(timeout=7)
-
+            join = threading.Thread(target=joinf)
+            join.start()
     except KeyError:
         ora(k)
 
@@ -227,11 +191,57 @@ def strt():
     e.start()
 
 
+# refresh the page until the meet is ready
 def ref():
-    while Text("Ricarica").exists():
-        click("Ricarica")
-        timeout12 = threading.Event()
-        timeout12.wait(timeout=7)
+    if Text("Ricarica").exists():
+        while Text("Ricarica").exists():
+            click("Ricarica")
+            print(
+                colorama.Fore.RED + colorama.Style.BRIGHT + "The Meet is not ready"
+            )
+            print(
+                colorama.Fore.YELLOW
+                + colorama.Style.BRIGHT
+                + "Refreshing the page..."
+            )
+            timeout12 = threading.Event()
+            timeout12.wait(timeout=10)
+        joinf()
+    while not Text("Partecipa"):
+        print(
+            colorama.Fore.RED + colorama.Style.BRIGHT + "The Meet is not ready"
+            )
+        print(
+            colorama.Fore.YELLOW
+            + colorama.Style.BRIGHT
+            + "Refreshing the page..."
+        )
+        pyautogui.press("f5")
+        timeout = threading.Event()
+        timeout.wait(timeout=10)
+    joinf()
+
+
+# join the meet
+def joinf():
+    if Text("Partecipa").exists():
+        click("Partecipa")
+        print(
+            colorama.Fore.GREEN + colorama.Style.BRIGHT + "You're in the Meet!"
+        )
+    elif Text("Chiedi di partecipare").exists():
+        click("Chiedi di partecipare")
+        print(
+            colorama.Fore.WHITE
+            + colorama.Style.BRIGHT
+            + "Waiting for the host to accept you"
+        )
+    ref()
+
+
+def closef():
+    if Text("Chiudi").exists():
+        click("Chiudi")
 
 
 def exc():
@@ -320,4 +330,3 @@ if __name__ == "__main__":
     A = 0
     i = 0
     self.mainloop()
-
